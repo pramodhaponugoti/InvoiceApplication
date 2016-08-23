@@ -13,6 +13,24 @@ public class InvoiceEmployee implements Serializable {
       private String projectName = null;
       private String clientNumber = null;
       
+      private Integer noOfHours = null;
+      private String sumBillRate = null;
+      
+      
+      
+	
+	public Integer getNoOfHours() {
+		return noOfHours;
+	}
+	public void setNoOfHours(Integer noOfHours) {
+		this.noOfHours = noOfHours;
+	}
+	public String getSumBillRate() {
+		return sumBillRate;
+	}
+	public void setSumBillRate(String sumBillRate) {
+		this.sumBillRate = sumBillRate;
+	}
 	public String getStartDate() {	
 		return startDate;
 	}

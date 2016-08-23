@@ -20,9 +20,8 @@ public class ReportsController {
 	public String loadInvoiceReports(ModelMap modelMap) throws Exception{
 			
 		modelMap.addAttribute("clientDataList",reportsService.getClientDataForInvoiceReport());
-		modelMap.addAttribute("employeeDataList",reportsService.getEmployeeDataForInvoiceReport());
-		modelMap.addAttribute("clientMsg","Clients Information...!");
-		modelMap.addAttribute("empMsg","Employees Information...!");
+		modelMap.addAttribute("clientMsg","Invoice Information...!");
+		
 	  		
 		return "invoicereportsdata";
 	}

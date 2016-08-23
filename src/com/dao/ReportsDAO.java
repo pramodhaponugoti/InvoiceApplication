@@ -24,8 +24,7 @@ public class ReportsDAO {
 		
 	public List<Invoice> getClientDataForInvoiceReport() throws DataSourceException{
 		List<Invoice> invoiceClientList = null;
-		String sql = "Select c.ClientNumber ,c.Name ClientName,p.ProjectNumber, p.ProjectName,"
-				+ "c.AddressLine1,c.AddressLine2,c.City,c.State,c.zip, c.BillingTerms Payment_Terms,c.InvoiceFreq Billing_Freq From Client c, Project p Where c.ClientNumber = p.ClientNumber ORDER BY c.ClientNumber ASC";
+		String sql = "Select c.ClientNumber ,p.ProjectName ,c.BillingTerms Payment_Terms,c.InvoiceFreq Billing_Freq,ts.personName EmpName,sum(ts.NumberOfHours) NumberOfHours , e.BillRate , e.BillRate*sum(ts.NumberOfHours) AmountPaid  From Client c, Project p,TimeSheet ts,Employee e Where ts.ProjectName = p.ProjectName and e.name= ts.PersonName and c.ClientNumber = p.ClientNumber Group By c.ClientNumber ,p.ProjectName ,c.BillingTerms,c.InvoiceFreq,ts.personName,e.BillRate ORDER BY c.ClientNumber ASC";
 		try{
 			invoiceClientList = jdbcTemplate.query(sql,new RowMapper<Invoice>(){
 
@@ -34,16 +33,13 @@ public class ReportsDAO {
 				// TODO Auto-generated method stub
 				Invoice invoice = new Invoice();
 				invoice.setClientNumber(rs.getString(1));
-				invoice.setClientName(rs.getString(2));
-				invoice.setProjectNumber(rs.getString(3));
-				invoice.setProject(rs.getString(4));
-				invoice.setAddressLine1(rs.getString(5));
-				invoice.setAddressLine2(rs.getString(6));
-				invoice.setCity(rs.getString(7));
-				invoice.setState(rs.getString(8));
-				invoice.setZip(rs.getString(9));
-				invoice.setPaymentTerms(rs.getString(10));
-				invoice.setBillingFreq(rs.getString(11));				
+				invoice.setProject(rs.getString(2));
+				invoice.setPaymentTerms(rs.getString(3));
+				invoice.setBillingFreq(rs.getString(4));
+				invoice.setEmpName(rs.getString(5));
+				invoice.setNoOfHours(rs.getString(6));
+				invoice.setBillRate(rs.getString(7));
+				invoice.setAmountPaid(rs.getString(8));
 				return invoice;
 			}
 			
@@ -90,7 +86,7 @@ public class ReportsDAO {
 	
 	public List<EmployeePayroll> getEmployeePayrollReports() throws DataSourceException{
 		List<EmployeePayroll>  emplPayrollList = null;
-		String sql = "Select  e.Name ,p.ProjectNumber ,p.ProjectName,e.BillRate ,e.BillRate*8 BillRate_Per_Day , e.BillRate*40 BillRate_Per_Week , e.BillRate*40*8 BillRate_Per_Month From Project p,ProjectPerson pp,Employee e Where pp.ProjectNumber = p.ProjectNumber and e.name=pp.PersonName  Order By  p.ProjectNumber ASC";
+		String sql = "Select ts.personName EmployeeName,p.ProjectNumber , p.projectName ,sum(ts.NumberOfHours) NumberOfHours, e.BillRate , e.BillRate*sum(ts.NumberOfHours)  AmountPaid From  Project p,TimeSheet ts,Employee e Where ts.ProjectNo = p.ProjectNumber and e.name= ts.PersonName  Group By p.ProjectNumber,ts.personName,p.projectName ,e.BillRate,p.Budget Order By p.ProjectNumber ASC";
 		try{
 			emplPayrollList = jdbcTemplate.query(sql,new RowMapper<EmployeePayroll>()
 					{
@@ -103,10 +99,9 @@ public class ReportsDAO {
 							empPayroll.setEmpName(rs.getString(1));
 							empPayroll.setProjectNumber(rs.getString(2));
 							empPayroll.setProjectName(rs.getString(3));
-							empPayroll.setBillRate(rs.getString(4));
-							empPayroll.setBillRatePerDay(rs.getString(5));
-							empPayroll.setBillRatePerWeek(rs.getString(6));
-							empPayroll.setBillRatePerMonth(rs.getString(7));
+							empPayroll.setNoOfHours(rs.getString(4));
+							empPayroll.setBillRate(rs.getString(5));
+							empPayroll.setAmountPaid(rs.getString(6));
 							
 							return empPayroll;
 						}
@@ -122,7 +117,7 @@ public class ReportsDAO {
 	
 	public List<ProjectReport> getProjectReports() throws DataSourceException{
 		List<ProjectReport> projectReportList = null;
-		String sql = "Select p.ProjectNumber ,p.ProjectName,count(DISTINCT e.Name) NumberOfEmps,count(DISTINCT c.ClientNumber) NumberOfClient, p.StartDate,p.EndDate,p.Budget From Client c ,Project p,ProjectPerson pp,Employee e Where c.ClientNumber = p.ClientNumber and pp.ProjectNumber = p.ProjectNumber and e.name=pp.PersonName Group By p.ProjectNumber ,p.ProjectName, p.StartDate,p.EndDate,p.Budget Order By  p.ProjectNumber ASC";
+		String sql = "Select p.ProjectNumber , p.projectName ,count(pp.PersonName) NumberOfEmployees, p.startDate,p.endDate ,p.Budget,p.Status,c.Name ClientName From  Project p,Client c ,ProjectPerson  pp Where pp.ProjectNumber = p.ProjectNumber and c.ClientNumber= p.ClientNumber  Group By p.projectName ,p.startDate,p.endDate ,p.Budget,c.Name,p.Status,p.ProjectNumber Order By  p.ProjectNumber ASC";
 		try{
 			projectReportList = jdbcTemplate.query(sql,new RowMapper<ProjectReport>()
 					{
@@ -135,11 +130,11 @@ public class ReportsDAO {
 							projectReport.setProjectNumber(rs.getString(1));
 							projectReport.setProjectName(rs.getString(2));
 							projectReport.setNoOfEmps(rs.getInt(3));
-							projectReport.setNoOfClients(rs.getInt(4));
-							projectReport.setStartDate(rs.getString(5));
-							projectReport.setEndDate(rs.getString(6));
-							projectReport.setBudget(rs.getString(7));
-							
+							projectReport.setStartDate(rs.getString(4));
+							projectReport.setEndDate(rs.getString(5));
+							projectReport.setBudget(rs.getString(6));
+							projectReport.setStatus(rs.getString(7));
+							projectReport.setClientName(rs.getString(8));
 							return projectReport;
 						}
 				

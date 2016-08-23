@@ -25,10 +25,11 @@
         <th>Project Number</th>        
         <th>Project Name</th>
         <th>Number Of Emps</th>
-        <th>Number of Clients</th>
         <th>Start Date</th>
         <th>End Date</th>
         <th>Budget</th>
+        <th>Status</th>
+        <th>Client Name</th>
          </tr>
         </thead>
         <c:forEach items="${projectDataList}" var="project">
@@ -36,10 +37,11 @@
         <td>${project.projectNumber}</td>
         <td>${project.projectName}</td>
         <td>${project.noOfEmps}</td>
-        <td>${project.noOfClients}</td>
         <td>${project.startDate}</td>
         <td>${project.endDate}</td>
         <td>$${project.budget}.00</td>
+        <td>${project.status}</td>
+        <td>${project.clientName}</td>
          </tr>
         </c:forEach>
         </table>

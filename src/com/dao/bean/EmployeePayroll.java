@@ -7,15 +7,10 @@ public class EmployeePayroll implements Serializable {
 	  private String projectNumber = null;
       private String  projectName= null;
       private String empName = null;
-      private String billRate = null;
+      private String billRate = null;      
+      private String noOfHours = null;
+      private String amountPaid = null;
       
-      private String billRatePerDay = null;
-      private String billRatePerWeek = null;
-      private String billRatePerMonth = null;
-      
-      
-    
-	
 	public String getProjectNumber() {
 		return projectNumber;
 	}
@@ -40,26 +35,19 @@ public class EmployeePayroll implements Serializable {
 	public void setBillRate(String billRate) {
 		this.billRate = billRate;
 	}
-	
-	
-	public String getBillRatePerDay() {
-		return billRatePerDay;
+	public String getNoOfHours() {
+		return noOfHours;
 	}
-	public void setBillRatePerDay(String billRatePerDay) {
-		this.billRatePerDay = billRatePerDay;
+	public void setNoOfHours(String noOfHours) {
+		this.noOfHours = noOfHours;
 	}
-	public String getBillRatePerWeek() {
-		return billRatePerWeek;
+	public String getAmountPaid() {
+		return amountPaid;
 	}
-	public void setBillRatePerWeek(String billRatePerWeek) {
-		this.billRatePerWeek = billRatePerWeek;
+	public void setAmountPaid(String amountPaid) {
+		this.amountPaid = amountPaid;
 	}
-	public String getBillRatePerMonth() {
-		return billRatePerMonth;
-	}
-	public void setBillRatePerMonth(String billRatePerMonth) {
-		this.billRatePerMonth = billRatePerMonth;
-	}
+
 	
       
         

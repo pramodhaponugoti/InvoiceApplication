@@ -21,7 +21,6 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService = null;	
 	
-	
 			
 	
 	@RequestMapping(value="/addCompanyForm",method=RequestMethod.GET)

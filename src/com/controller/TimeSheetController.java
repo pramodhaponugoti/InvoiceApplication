@@ -29,11 +29,20 @@ public class TimeSheetController {
 	
 	@RequestMapping(value="/addTimeSheetForm",method=RequestMethod.GET)
 	public String addTimeSheetForm(ModelMap modelMap) throws Exception{
+		
 		TimeSheetCommand timeSheetCommand = new TimeSheetCommand();
 		timeSheetCommand.setPersonName(userService.getLoginName());
+		String sql = "";
+		if(userService.getLoginRole().equals("Developer")){
+            sql = " Select   ProjectNo , ProjectName  From TimeSheet where upper(PersonName) like  '%"+userService.getLoginName().toUpperCase()+"%' Group By ProjectNo , ProjectName";
+           }else{
+               sql = " Select   ProjectNo , ProjectName  From TimeSheet  Group By ProjectNo , ProjectName";
+           }
+		modelMap.addAttribute("projectDataList",timeSheetService.getProjectNameId(sql));
 		modelMap.addAttribute("timeSheetCommand",timeSheetCommand);
 		modelMap.addAttribute("dateList",getDates());
 		modelMap.addAttribute("role", userService.getLoginRole());
+		
 		return "timesheet";
 	}
 	
@@ -47,7 +56,16 @@ public class TimeSheetController {
 	timeSheetCommand.setLoginDate(timeSheet.getLoginDate());
 	timeSheetCommand.setNumberOfHours(timeSheet.getNumberOfHours());
 	timeSheetCommand.setStatus(timeSheet.getStatus());
+	timeSheetCommand.setPersonId(timeSheet.getPersonId());
+	timeSheetCommand.setProjectData(timeSheet.getProjectNo()+"-"+timeSheet.getPersonName());
 	
+	String sql = "";
+	if(userService.getLoginRole().equals("Developer")){
+        sql = " Select   ProjectNo , ProjectName  From TimeSheet where upper(PersonName) like  '%"+userService.getLoginName().toUpperCase()+"%' Group By ProjectNo , ProjectName";
+       }else{
+           sql = " Select   ProjectNo , ProjectName  From TimeSheet  Group By ProjectNo , ProjectName";
+       }
+		modelMap.addAttribute("projectDataList",timeSheetService.getProjectNameId(sql));
 		modelMap.addAttribute("timeSheetCommand",timeSheetCommand);
 		modelMap.addAttribute("dateList",getDates());
 		modelMap.addAttribute("role", userService.getLoginRole());
@@ -78,6 +96,10 @@ public class TimeSheetController {
 		timeSheet.setLoginDate(timeSheetCommand.getLoginDate());
 		timeSheet.setNumberOfHours(timeSheetCommand.getNumberOfHours());
 		timeSheet.setStatus(timeSheetCommand.getStatus());
+		timeSheet.setPersonId(timeSheetCommand.getPersonId());
+		String[] data = timeSheetCommand.getProjectData().split("-");		
+		timeSheet.setProjectNo(data[0]);
+		timeSheet.setProjectName(data[1]);
 		
 		if(timeSheetService.isTimeSheetExist(timeSheet)){
 			timeSheetService.updateTimeSheet(timeSheet);
@@ -104,6 +126,7 @@ public class TimeSheetController {
 			@RequestParam("personName") String personName ,@RequestParam("loginDate") String loginDate  ) throws Exception{
 	
 	TimeSheet timeSheet =	timeSheetService.getTimeSheet(personName, loginDate);
+	timeSheet.setLoginDate(loginDate);
 	timeSheet.setStatus("Approved");	
 	timeSheetService.updateTimeSheetStatus(timeSheet);
 	
@@ -125,6 +148,7 @@ public class TimeSheetController {
 			@RequestParam("personName") String personName ,@RequestParam("loginDate") String loginDate  ) throws Exception{
 	
 	TimeSheet timeSheet =	timeSheetService.getTimeSheet(personName, loginDate);
+	timeSheet.setLoginDate(loginDate);
 	timeSheet.setStatus("DisApproved");	
 	timeSheetService.updateTimeSheetStatus(timeSheet);
 	
@@ -142,29 +166,67 @@ public class TimeSheetController {
 	}
 		
 	public List<String> getDates(){
-		List<String> dateList = new ArrayList<String>();
-		dateList.add("22/08/2016");
-		dateList.add("21/08/2016");
-		dateList.add("20/08/2016");
-		dateList.add("19/08/2016");
-		dateList.add("18/08/2016");
-		dateList.add("17/08/2016");
-		dateList.add("16/08/2016");
-		dateList.add("15/08/2016");
-		dateList.add("14/08/2016");
-		dateList.add("13/08/2016");
-		dateList.add("12/08/2016");
-		dateList.add("11/08/2016");
-		dateList.add("10/08/2016");
-		dateList.add("09/08/2016");
-		dateList.add("08/08/2016");
+		List<String> dateList = new ArrayList<String>();		
+		dateList.add("06/26/2016");
+		dateList.add("06/27/2016");
+		dateList.add("06/28/2016");
+		dateList.add("06/29/2016");
+		dateList.add("06/30/2016");
+		dateList.add("07/01/2016");
+		dateList.add("07/02/2016");
+		dateList.add("07/03/2016");
+		dateList.add("07/04/2016");
+		dateList.add("07/05/2016");
+		dateList.add("07/06/2016");
+		dateList.add("07/07/2016");
 		dateList.add("07/08/2016");
-		dateList.add("06/08/2016");
-		dateList.add("05/08/2016");
-		dateList.add("04/08/2016");
-		dateList.add("03/08/2016");
-		dateList.add("02/08/2016");
-		dateList.add("01/08/2016");
+		dateList.add("07/09/2016");
+		dateList.add("07/10/2016");
+		dateList.add("07/11/2016");
+		dateList.add("07/12/2016");
+		dateList.add("07/13/2016");
+		dateList.add("07/14/2016");
+		dateList.add("07/15/2016");
+		dateList.add("07/16/2016");
+		dateList.add("07/17/2016");
+		dateList.add("07/18/2016");
+		dateList.add("07/19/2016");
+		dateList.add("07/20/2016");
+		dateList.add("07/21/2016");
+		dateList.add("07/22/2016");
+		dateList.add("07/23/2016");
+		dateList.add("07/24/2016");
+		dateList.add("07/25/2016");
+		dateList.add("07/26/2016");
+		dateList.add("07/27/2016");
+		dateList.add("07/28/2016");
+		dateList.add("07/29/2016");
+		dateList.add("07/30/2016");
+		dateList.add("07/31/2016");
+		dateList.add("08/01/2016");
+		dateList.add("08/02/2016");
+		dateList.add("08/03/2016");
+		dateList.add("08/04/2016");
+		dateList.add("08/05/2016");
+		dateList.add("08/06/2016");
+		dateList.add("08/07/2016");
+		dateList.add("08/08/2016");
+		dateList.add("08/09/2016");
+		dateList.add("08/10/2016");
+		dateList.add("08/11/2016");
+		dateList.add("08/12/2016");
+		dateList.add("08/13/2016");
+		dateList.add("08/14/2016");
+		dateList.add("08/15/2016");
+		dateList.add("08/16/2016");
+		dateList.add("08/17/2016");
+		dateList.add("08/18/2016");
+		dateList.add("08/19/2016");
+		dateList.add("08/20/2016");
+		dateList.add("08/21/2016");
+		dateList.add("08/22/2016");
+		dateList.add("08/23/2016");
+
 		return dateList;
 	}
 }

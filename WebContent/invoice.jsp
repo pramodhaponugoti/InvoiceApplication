@@ -37,7 +37,7 @@
 				</div>
 				</div>
 				
-              <input type="submit" name="submit" id="submit" value="Send Invoice" size="5" class="btn btn-primary ">
+              <input type="submit" name="submit" id="submit" value="Send Email" size="5" class="btn btn-primary ">
               <input type="reset" value="Reset" class="btn btn-primary pull-right"> 
             	
             </div>

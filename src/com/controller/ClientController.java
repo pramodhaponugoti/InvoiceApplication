@@ -19,7 +19,8 @@ public class ClientController {
 	
 	@Autowired
 	private ClientService clientService = null;
-		
+	
+	
 	@RequestMapping(value="/addClientForm",method=RequestMethod.GET)
 	public String addClientForm(ModelMap modelMap) throws Exception{
 		modelMap.addAttribute("clientCommand",new ClientCommand());

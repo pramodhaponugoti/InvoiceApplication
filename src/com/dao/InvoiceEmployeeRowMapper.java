@@ -15,10 +15,10 @@ public class InvoiceEmployeeRowMapper implements RowMapper<InvoiceEmployee> {
 	public InvoiceEmployee mapRow(ResultSet rs, int indexNumber) throws SQLException {
 		
 		InvoiceEmployee invoiceEmployee = new InvoiceEmployee();
-		invoiceEmployee.setStartDate(rs.getString(1));	
-		invoiceEmployee.setEndDate(rs.getString(2));
-		invoiceEmployee.setEmpName(rs.getString(3));
-		invoiceEmployee.setBillRate(rs.getString(4));
+		invoiceEmployee.setEmpName(rs.getString(1));	
+		invoiceEmployee.setNoOfHours(rs.getInt(2));
+		invoiceEmployee.setBillRate(rs.getString(3));
+		invoiceEmployee.setSumBillRate(rs.getString(4));
 		
 		return invoiceEmployee;
 	}	

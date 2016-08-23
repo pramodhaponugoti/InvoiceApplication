@@ -33,7 +33,10 @@
         <table class="table" > 
         <thead class="thead-default">
         <tr class="bg-warning">
+        <th>Person Id</th>
         <th>Person Name</th>
+        <th>Project ID</th>
+        <th>Project Name</th>
         <th>Number Of Hours</th>
         <th>Login Date</th>
         <th>Status</th>
@@ -44,9 +47,12 @@
         </thead>
         <c:forEach items="${timeSheetDataList}" var="timeSheet">
         <tr class="bg-primary">
+        <td>${timeSheet.personId}</td>
         <td>${timeSheet.personName}</td>
+        <td>${timeSheet.projectNo}</td>
+        <td>${timeSheet.projectName}</td>
         <c:if test = "${timeSheet.numberOfHours == 0}">
- 		<td class="btn btn-danger">Hours is Zero . Please Enter Hours...!</td>
+ 		<td class="btn btn-danger">Hours is Empty . Please Enter Hours...!</td>
  		</c:if>
  		<c:if test = "${timeSheet.numberOfHours != 0}">
  		<td>${timeSheet.numberOfHours}</td>

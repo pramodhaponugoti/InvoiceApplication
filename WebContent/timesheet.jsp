@@ -27,6 +27,15 @@
         <f:form role="form" action="saveOrUpdateTimeSheet" method="POST" commandName="timeSheetCommand">
             <div class="col-lg-4">
                
+               
+               <div class="form-group">
+                    <label >Person Id </label>
+                    <div class="input-group">
+                        <f:input  class="form-control" path="personId" required="true" />
+                        <span class="input-group-addon"> <span class="glyphicon glyphicon-asterisk"></span> </span>
+                    </div>
+                </div>
+               
                 <div class="form-group">
                     <label >Person Name </label>
                     <div class="input-group">
@@ -40,7 +49,15 @@
                         <f:input path="numberOfHours"  class="form-control" placeholder="Enter Hours" ></f:input>
                         <span class="input-group-addon"></span>
                     </div>
-                </div>                
+                </div>        
+                
+                <div class="form-group">
+                    <label >Project </label>
+                    <div class="input-group">
+                      <f:select   class="form-control"  path="projectData"  items="${projectDataList}" />
+                        <span class="input-group-addon"> <span class="glyphicon glyphicon-asterisk"></span> </span>
+                    </div>
+                </div>        
                 
                 <div class="form-group">
                     <label >Date  </label>

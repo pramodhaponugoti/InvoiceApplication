@@ -12,6 +12,23 @@ public class ProjectReport implements Serializable {
       private String endDate = null;
       private String budget = null;
       
+      private String status = null;
+      private String clientName = null;
+      
+      
+      
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	public String getProjectNumber() {
 		return projectNumber;
 	}

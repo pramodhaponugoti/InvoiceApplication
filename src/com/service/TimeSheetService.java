@@ -108,6 +108,19 @@ public class TimeSheetService {
 		return timeSheet;
 	}
 	
+	public List<String> getProjectNameId(String sql) throws ServicessException{
+		List<String> pnameIdList = null;
+		try{
+			
+			pnameIdList =timeSheetDAO.getProjectNameId(sql);				
+				
+		}catch(DataSourceException exp){
+			exp.printStackTrace();
+			throw new ServicessException();
+		}
+		return pnameIdList;
+	}
+	
 	
 	
 }

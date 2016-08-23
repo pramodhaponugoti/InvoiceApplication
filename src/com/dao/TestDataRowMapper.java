@@ -16,19 +16,13 @@ public class TestDataRowMapper implements RowMapper<TestData> {
 		
 		TestData testData = new TestData();		
 		testData.setClientID(rs.getString(1));
-		testData.setClientName(rs.getString(2));	
-		testData.setProjectNumber(rs.getString(3));
-		testData.setProjectName(rs.getString(4));
-		testData.setStartDate(rs.getString(5));
-		testData.setEndDate(rs.getString(6));
-		testData.setProjectBudget(rs.getString(7));
-		testData.setNoOfEmps(rs.getString(8));
-		testData.setNoOfHours(rs.getString(9));
-		testData.setAmountPaid(rs.getString(10));
-		testData.setProjectBeginDate(rs.getString(11));
-		testData.setProjectEndDate(rs.getString(12));
-		testData.setProjectBalance(rs.getString(13));
-		testData.setProjectStatus(rs.getString(14));
+		testData.setProjectName(rs.getString(2));
+		testData.setNoOfEmps(rs.getString(3));
+		testData.setNoOfHours(rs.getString(4));
+		testData.setProjectBudget(rs.getString(5));
+		testData.setStartDate(rs.getString(6));
+		testData.setEndDate(rs.getString(7));
+		testData.setProjectStatus(rs.getString(8));
 		return testData;
 	}	
 

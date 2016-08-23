@@ -20,7 +20,6 @@ public class LoginController {
 	@Autowired
 	private LoginCommand loginCommand = null;
 	
-	
 	@RequestMapping(value="/loginPage",method=RequestMethod.GET)
 	public String getLoginPage(ModelMap modelMap) throws Exception{
 		

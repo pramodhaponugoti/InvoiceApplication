@@ -5,14 +5,39 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class TimeSheetCommand implements Serializable {
 
+	
+	 private String personId;
      private String personName;
      private int    numberOfHours;
      private String loginDate;
+    
+     private String projectData;
+    
+     
      private String status="Approval is Pending...";
 
+     
   
 
-    public String getPersonName() {
+    public String getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+
+	
+
+	public String getProjectData() {
+		return projectData;
+	}
+
+	public void setProjectData(String projectData) {
+		this.projectData = projectData;
+	}
+
+	public String getPersonName() {
         return personName;
     }
 

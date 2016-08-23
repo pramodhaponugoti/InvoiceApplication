@@ -20,18 +20,12 @@
         <thead class="thead-default">
         <tr class="bg-warning">
         <th>CLIENT ID</th>
-        <th>CLIENT NAME</th>
-        <th>PROJECT NUMBER</th>
         <th>PROJECT NAME</th>
-        <th>START DATE</th>
-        <th>END DATE</th>
-        <th>PROJECT BUDGET</th>
         <th>NUMBER OF EMPS</th>
         <th>NUMBER OF HOURS</th>
-        <th>AMOUNT PAID</th>
-        <th>PROJECTBEGIN DATE</th>
-        <th>PROJECT ENDDATE</th>
-        <th>PROJECT BALANCE</th>
+        <th>PROJECT BUDGET</th>
+        <th>START DATE</th>
+        <th>END DATE</th>       
         <th>PROJECT STATUS</th>
         </tr>
         </thead>
@@ -39,18 +33,12 @@
         <c:forEach items="${testDataList}" var="testData">
         <tr class="bg-primary">
         <td>${testData.clientID}</td>
-        <td>${testData.clientName}</td>
-        <td>${testData.projectNumber}</td>
         <td>${testData.projectName}</td>
-        <td>${testData.startDate}</td>
-        <td>${testData.endDate}</td>
-        <td>${testData.projectBudget}</td>
         <td>${testData.noOfEmps}</td>
         <td>${testData.noOfHours}</td>
-        <td>${testData.amountPaid}</td>
-        <td>${testData.projectBeginDate}</td>
-        <td>${testData.projectEndDate}</td>
-        <td>${testData.projectBalance}</td>
+         <td>${testData.projectBudget}</td>
+        <td>${testData.startDate}</td>
+        <td>${testData.endDate}</td>       
         <td>${testData.projectStatus}</td>
         </tr>
         </c:forEach>

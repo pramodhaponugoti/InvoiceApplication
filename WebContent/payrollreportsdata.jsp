@@ -22,10 +22,9 @@
         <th>Employee Name</th>
         <th>Project Number</th>        
         <th>Project Name</th>
+        <th>Number Of Hours</th>
         <th>Bill Rate</th>
-        <th>Bill Rate Per Day</th>
-        <th>Bill Rate Per Week</th>
-        <th>Bill Rate Per Month</th>
+        <th>Amount Paid</th>      
          </tr>
         </thead>
         <c:forEach items="${payrollDataList}" var="payroll">
@@ -33,10 +32,9 @@
         <td>${payroll.empName}</td>
         <td>${payroll.projectNumber}</td>
         <td>${payroll.projectName}</td>
+        <td>${payroll.noOfHours}</td>
         <td>${payroll.billRate}</td>
-        <td>$${payroll.billRatePerDay}.00</td>
-        <td>$${payroll.billRatePerWeek}.00</td>
-        <td>$${payroll.billRatePerMonth}.00</td>
+         <td>$${payroll.amountPaid}.00</td>
         </tr>
         </c:forEach>
         </table>

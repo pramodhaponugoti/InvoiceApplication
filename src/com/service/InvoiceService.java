@@ -30,11 +30,11 @@ public class InvoiceService {
 		return invoice;
 	}
 	
-	public List<InvoiceEmployee> getEmployeeDetails(String clientNumber , String projectNumber)  throws ServicessException
+	public List<InvoiceEmployee> getEmployeeDetails(String clientNumber , String projectNumber,String startDate,String endDate)  throws ServicessException
 	{
 		List<InvoiceEmployee> emplList = null;
 		try{
-			emplList = invoiceDAO.getEmployeeDetails(clientNumber, projectNumber);
+			emplList = invoiceDAO.getEmployeeDetails(clientNumber, projectNumber, startDate, endDate);
 		}catch(DataSourceException exp){
 			exp.printStackTrace();
 			throw new ServicessException();
